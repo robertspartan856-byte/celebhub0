@@ -48,7 +48,10 @@ export default async function EventsPage({ searchParams }: EventsPageProps) {
   const headerStore = await headers();
   const host = headerStore.get("x-forwarded-host") ?? headerStore.get("host") ?? "localhost:3000";
   const protocol = headerStore.get("x-forwarded-proto") ?? (host.includes("localhost") ? "http" : "https");
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? `${protocol}://${host}`;
+  const baseUrl =
+    process.env.NEXT_PUBLIC_API_BASE_URL ??
+    process.env.NEXT_PUBLIC_BASE_URL ??
+    `${protocol}://${host}`;
 
   const response = await fetch(`${baseUrl}/api/events?${query.toString()}`, {
     cache: "no-store",

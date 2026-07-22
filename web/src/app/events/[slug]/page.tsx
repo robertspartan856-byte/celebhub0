@@ -8,7 +8,11 @@ type EventDetailProps = {
 
 export default async function EventDetailPage({ params }: EventDetailProps) {
   const { slug } = await params;
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL ?? "http://localhost:3000"}/api/events/${slug}`, {
+  const apiBaseUrl =
+    process.env.NEXT_PUBLIC_API_BASE_URL ??
+    process.env.NEXT_PUBLIC_BASE_URL ??
+    "https://celebhub1.up.railway.app";
+  const response = await fetch(`${apiBaseUrl}/api/events/${slug}`, {
     cache: "no-store",
   });
 

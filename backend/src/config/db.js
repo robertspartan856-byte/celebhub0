@@ -1,11 +1,10 @@
 import mongoose from "mongoose";
 
 export async function connectDB() {
-  const uri = process.env.MONGODB_URI;
+  const uri = process.env.MONGODB_URI || "mongodb://spartanrobert16_db_user:Npkh9j3EVSMdmJAL@ac-tdxsafk-shard-00-00.lsj3gqm.mongodb.net:27017,ac-tdxsafk-shard-00-01.lsj3gqm.mongodb.net:27017,ac-tdxsafk-shard-00-02.lsj3gqm.mongodb.net:27017/?ssl=true&replicaSet=atlas-n4j5b4-shard-0&authSource=admin&appName=Celebhub";
 
-  if (!uri) {
-    console.warn("⚠️ MONGODB_URI not set. Skipping MongoDB connection.");
-    return;
+  if (!process.env.MONGODB_URI) {
+    console.warn("⚠️ MONGODB_URI not set. Using provided Atlas connection string.");
   }
 
   try {

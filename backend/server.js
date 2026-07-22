@@ -24,6 +24,8 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://127.0.0.1:3000",
   "http://127.0.0.1:5173",
+  "https://celebhub1.up.railway.app",
+  "https://celebhub1-production.up.railway.app",
   ...(process.env.CORS_ORIGIN?.split(",").map((value) => value.trim()).filter(Boolean) ?? []),
   ...(process.env.FRONTEND_URL ? [process.env.FRONTEND_URL] : []),
 ];
@@ -38,7 +40,9 @@ app.use(
       if (
         allowedOrigins.includes(origin) ||
         /^https:\/\/[-a-z0-9]+\.vercel\.app$/i.test(origin) ||
-        /^https:\/\/[-a-z0-9]+\.vercel\.dev$/i.test(origin)
+        /^https:\/\/[-a-z0-9]+\.vercel\.dev$/i.test(origin) ||
+        /^https:\/\/[-a-z0-9]+\.up\.railway\.app$/i.test(origin) ||
+        /^https:\/\/[-a-z0-9]+\.railway\.app$/i.test(origin)
       ) {
         return callback(null, true);
       }

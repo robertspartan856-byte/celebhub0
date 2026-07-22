@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 
+const API_BASE_URL =
+  import.meta.env.VITE_API_BASE_URL || "https://celebhub1.up.railway.app";
+
 function AdminLogin({ onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +17,7 @@ function AdminLogin({ onLogin }) {
     setMessage("");
 
     try {
-      const response = await fetch("https://celebhub1-production.up.railway.app/api/admin/login", {
+      const response = await fetch(`${API_BASE_URL}/api/admin/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -108,7 +111,7 @@ function AdminDashboard() {
     try {
       const token = localStorage.getItem("celebhub_admin_token");
 
-      const response = await fetch("https://celebhub1-production.up.railway.app/api/admin/stats", {
+      const response = await fetch(`${API_BASE_URL}/api/admin/stats`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -134,7 +137,7 @@ function AdminDashboard() {
       const token = localStorage.getItem("celebhub_admin_token");
 
       const response = await fetch(
-        `https://celebhub1-production.up.railway.app/api/newsletter/subscribers?search=${encodeURIComponent(
+        `${API_BASE_URL}/api/newsletter/subscribers?search=${encodeURIComponent(
           searchTerm
         )}`,
         {
@@ -374,7 +377,7 @@ function App() {
 
     try {
       const response = await fetch(
-        "https://celebhub1-production.up.railway.app/api/newsletter/subscribe",
+        `${API_BASE_URL}/api/newsletter/subscribe`,
         {
           method: "POST",
           headers: {
